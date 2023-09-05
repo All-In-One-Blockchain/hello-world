@@ -27,7 +27,8 @@ const abi = [
   }
 ];
 
-const HELLO_WORLD_ADDRESS = "0x018544fcee109f5de1724b8c790f03d6bc65b278"; // 请替换为你的合约地址
+// const HELLO_WORLD_ADDRESS = "0x018544fcee109f5de1724b8c790f03d6bc65b278"; // 请替换为你的合约地址
+const HELLO_WORLD_ADDRESS = "0x75236bb20a6e6b80706eb5e7e5e1c5755828027c"
 
 const main = async () => {
   // 从环境变量中读取私钥
@@ -44,8 +45,14 @@ const main = async () => {
   console.log("Current number:", currentNumber.toString());
 
   const contractCanWrite = new ethers.Contract(HELLO_WORLD_ADDRESS, abi, wallet)
-  // await contractCanWrite.setNumber(5);
-  await contractCanWrite.increment();
+  await contractCanWrite.setNumber(5);
+  // await contractCanWrite.increment();
+
+  // const contractInterface = new ethers.Interface(abi);
+  // const data1 = contractInterface.encodeFunctionData("setNumber", [5]);
+  // console.log("data1: ", data1);
+  // const data2 = contractInterface.encodeFunctionData("increment");
+
 
   currentNumber = await contractCanWrite.number();
   console.log("New number:", currentNumber.toString());
